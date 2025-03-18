@@ -13,35 +13,50 @@ datasource db {
   url      = "file:./dev.db"
 }
 
-
 // ユーザー
 model User {
-  id String  @id @default(cuid())
+  id       String @id @default(cuid())
   singinId String @unique
-  name String
+  name     String
 
   Task Task[]
 }
 
 model Task {
- id String  @id @default(cuid())
- title String
- description String?
- details  String?
- startDate DateTime @default(now())
- // 期限
- endDate DateTime
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  details     String?
+  startDate   DateTime @default(now())
+  // 期限
+  endDate     DateTime
+  orderNo String?
 
- userId String
- User   User @relation(fields: [userId], references: [id])
+  status  Status
 
- orderNo String?
- // todo doing done
- status String
+  userId String?
+  User   User?   @relation(fields: [userId], references: [id])
 
- isDeleted Boolean @default(false)
+  sectionId String?
+  Section   Section? @relation(fields: [sectionId], references: [id])
 
- createdAt DateTime @default(now())
- updatedAt DateTime @updatedAt
+  isDeleted Boolean @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum Status {
+  TODO
+  DOING
+  DONE
+}
+
+model Section {
+  id    String @id @default(cuid())
+  name  String
+  Tasks Task[]
+
+  isDeleted Boolean @default(false)
 }
 

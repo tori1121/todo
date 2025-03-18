@@ -29,7 +29,6 @@ const Calendar: React.FC<CalendarProps> = ({ tasks }) => {
     const daysInMonth = eachDayOfInterval({ start, end });
     setDays(daysInMonth);
 
-    // 月初めの日の曜日を計算してセット
     setStartDayOfWeek(getDay(start));
   }, [currentDate]);
 
@@ -53,7 +52,7 @@ const Calendar: React.FC<CalendarProps> = ({ tasks }) => {
             }
             className="bg-gray-300 p-2 rounded-md hover:bg-gray-400"
           >
-            前月
+            Prev
           </Button>
           <h2 className="text-2xl font-bold">
             {format(currentDate, "yyyy年MM月")}
@@ -70,7 +69,7 @@ const Calendar: React.FC<CalendarProps> = ({ tasks }) => {
             }
             className="bg-gray-300 p-2 rounded-md hover:bg-gray-400"
           >
-            次月
+            Next
           </button>
         </div>
 
@@ -94,7 +93,7 @@ const Calendar: React.FC<CalendarProps> = ({ tasks }) => {
             return (
               <div
                 key={index}
-                className="text-center p-2 border rounded-sm min-h-20"
+                className="text-center p-2 border rounded-sm min-h-28"
               >
                 <div className="text-sm">{format(day, "d")}</div>
                 {dayTasks.map((task, taskIndex) => (
